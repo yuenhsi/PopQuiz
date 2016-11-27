@@ -11,6 +11,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button mTrueButton;
     private Button mFalseButton;
+    private Button mNextButton;
     private int questionIndex;
     private Question[] questions;
 
@@ -31,24 +32,24 @@ public class MainActivity extends AppCompatActivity {
 
         updateQuestion();
 
-        Button trueButton = (Button)findViewById(R.id.true_button);
-        Button falseButton = (Button)findViewById(R.id.false_button);
-        Button nextButton = (Button)findViewById(R.id.next_button);
+        mTrueButton = (Button)findViewById(R.id.true_button);
+        mFalseButton = (Button)findViewById(R.id.false_button);
+        mNextButton = (Button)findViewById(R.id.next_button);
 
-        trueButton.setOnClickListener(new View.OnClickListener() {
+        mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 checkAnswerAndToast(questionIndex, true);
             }
         });
-        falseButton.setOnClickListener(new View.OnClickListener() {
+        mFalseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 checkAnswerAndToast(questionIndex, false);
             }
         });
 
-        nextButton.setOnClickListener(new View.OnClickListener() {
+        mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 questionIndex = (questionIndex + 1) % questions.length;

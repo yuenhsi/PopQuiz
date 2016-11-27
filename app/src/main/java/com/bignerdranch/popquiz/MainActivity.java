@@ -16,6 +16,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Question questionOne = new Question(R.string.question_one, true);
+        Question questionTwo = new Question(R.string.question_two, false);
+        Question questionThree = new Question(R.string.question_three, false);
+        Question questionFour = new Question(R.string.question_four, true);
+        Question questionFive = new Question(R.string.question_five, true);
+
+        Question[] questions = new Question[]
+                {questionOne, questionTwo, questionThree, questionFour, questionFive};
+
         mTrueButton = (Button)findViewById(R.id.true_button);
         mFalseButton = (Button)findViewById(R.id.false_button);
 

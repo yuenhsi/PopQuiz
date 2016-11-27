@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -11,8 +12,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Button mTrueButton;
     private Button mFalseButton;
-    private Button mNextButton;
-    private Button mPrevButton;
+    private ImageButton mNextButton;
+    private ImageButton mPrevButton;
     private int questionIndex;
     private Question[] questions;
     private View mQuestionTextView;
@@ -36,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
         mTrueButton = (Button)findViewById(R.id.true_button);
         mFalseButton = (Button)findViewById(R.id.false_button);
-        mNextButton = (Button)findViewById(R.id.next_button);
-        mPrevButton = (Button)findViewById(R.id.prev_button);
+        mNextButton = (ImageButton)findViewById(R.id.next_button);
+        mPrevButton = (ImageButton)findViewById(R.id.prev_button);
         mQuestionTextView = findViewById(R.id.question_text);
 
         mTrueButton.setOnClickListener(new View.OnClickListener() {

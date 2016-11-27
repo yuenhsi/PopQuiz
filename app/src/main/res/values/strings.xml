@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">PopQuiz</string>
-    <string name="question_text">Life is like a box of chocolates.</string>
+    <string name="question_one">Life is like a box of chocolates.</string>
+    <string name="question_two">A box of chocolates is like life.</string>
+    <string name="question_three">Dark chocolate is better than white chocolate.</string>
+    <string name="question_four">#blacklivesmatter</string>
+    <string name="question_five">VP are the boston major champions.</string>
     <string name="true_button">True</string>
     <string name="false_button">False</string>
-    <string name="correct_toast">Such is life</string>
-    <string name="incorrect_toast">Life IS like a box of chocolates.</string>
+    <string name="correct_toast">Correct!</string>
+    <string name="incorrect_toast">Incorrect!</string>
+    <string name="next_button">Next</string>
 </resources>

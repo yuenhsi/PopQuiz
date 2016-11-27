@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private Button mNextButton;
     private int questionIndex;
     private Question[] questions;
+    private View mQuestionTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         mTrueButton = (Button)findViewById(R.id.true_button);
         mFalseButton = (Button)findViewById(R.id.false_button);
         mNextButton = (Button)findViewById(R.id.next_button);
+        mQuestionTextView = findViewById(R.id.question_text);
 
         mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,13 +51,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mNextButton.setOnClickListener(new View.OnClickListener() {
+        View.OnClickListener incrementIndexAndUpdateListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 questionIndex = (questionIndex + 1) % questions.length;
                 updateQuestion();
             }
-        });
+        };
+
+        mNextButton.setOnClickListener(incrementIndexAndUpdateListener);
+        mQuestionTextView.setOnClickListener(incrementIndexAndUpdateListener);
     }
 
     private void updateQuestion() {

@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String TAG = "MainActivity";
     private Button mTrueButton;
     private Button mFalseButton;
     private ImageButton mNextButton;
@@ -19,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
     private int questionIndex;
     private Question[] questions;
     private View mQuestionTextView;
+
+    public static final String TAG = "MainActivity";
+    public static final String QUESTION_INDEX = "index";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
         questions = new Question[]
                 {questionOne, questionTwo, questionThree, questionFour, questionFive};
         questionIndex = 0;
+        if (savedInstanceState != null) {
+            questionIndex = savedInstanceState.getInt(QUESTION_INDEX);
+        }
 
         updateQuestion();
 
@@ -98,6 +103,13 @@ public class MainActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         Log.d(TAG, "onResume called.");
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        Log.d(TAG, "onSaveInstanceState called.");
+        savedInstanceState.putInt(QUESTION_INDEX, questionIndex);
     }
 
     private void updateQuestion() {

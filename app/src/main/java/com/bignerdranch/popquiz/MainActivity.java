@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private Button mFalseButton;
     private ImageButton mNextButton;
     private ImageButton mPrevButton;
+    private Button mCheatButton;
     private int questionIndex;
     private Question[] questions;
     private View mQuestionTextView;
@@ -47,7 +48,10 @@ public class MainActivity extends AppCompatActivity {
         mFalseButton = (Button)findViewById(R.id.false_button);
         mNextButton = (ImageButton)findViewById(R.id.next_button);
         mPrevButton = (ImageButton)findViewById(R.id.prev_button);
+        mCheatButton = (Button)findViewById(R.id.cheat_button);
         mQuestionTextView = findViewById(R.id.question_text);
+
+
 
         mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override

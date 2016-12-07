@@ -1,5 +1,6 @@
 package com.bignerdranch.popquiz;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
     public static final String QUESTION_INDEX = "index";
+    public static final int REQUESTCODE_CHEAT = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +53,14 @@ public class MainActivity extends AppCompatActivity {
         mCheatButton = (Button)findViewById(R.id.cheat_button);
         mQuestionTextView = findViewById(R.id.question_text);
 
-
+        mCheatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, CheatActivity.class).putExtra(
+                        CheatActivity.IS_ANSWER_TRUE_EXTRA, questions[questionIndex].isAnswer());
+                startActivityForResult(i, REQUESTCODE_CHEAT);
+            }
+        });
 
         mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override

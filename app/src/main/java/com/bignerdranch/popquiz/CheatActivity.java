@@ -1,5 +1,6 @@
 package com.bignerdranch.popquiz;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ public class CheatActivity extends AppCompatActivity {
     Button mConfirmationButton;
 
     public static final String IS_ANSWER_TRUE_EXTRA = "isAnswerTrue";
+    public static final String DID_I_CHEAT_EXTRA = "didICheat";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +24,9 @@ public class CheatActivity extends AppCompatActivity {
         mConfirmationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra(DID_I_CHEAT_EXTRA, true);
+                setResult(Activity.RESULT_OK, returnIntent);
             }
         });
     }

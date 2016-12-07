@@ -1,6 +1,8 @@
 package com.bignerdranch.popquiz;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -116,6 +118,16 @@ public class MainActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         Log.d(TAG, "onResume called.");
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == REQUESTCODE_CHEAT) {
+            if (resultCode == Activity.RESULT_OK) {
+                data.getBooleanExtra(CheatActivity.DID_I_CHEAT_EXTRA, false);
+            }
+        }
     }
 
     @Override

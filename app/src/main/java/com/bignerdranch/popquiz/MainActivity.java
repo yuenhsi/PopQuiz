@@ -70,9 +70,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 checkAnswerAndToast(questionIndex, true);
-                if (cheated) {
-                    Toast.makeText(MainActivity.this, R.string.cheated_toast,Toast.LENGTH_SHORT).show();
-                }
             }
         });
 
@@ -80,9 +77,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 checkAnswerAndToast(questionIndex, false);
-                if (cheated) {
-                    Toast.makeText(MainActivity.this, R.string.cheated_toast,Toast.LENGTH_SHORT).show();
-                }
             }
         });
 
@@ -155,10 +149,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkAnswerAndToast(int questionIndex, boolean selection) {
-        if (questions[questionIndex].isAnswer() == selection) {
-            Toast.makeText(MainActivity.this, R.string.correct_toast ,Toast.LENGTH_SHORT).show();
+        if (cheated) {
+            Toast.makeText(MainActivity.this, R.string.cheated_toast,Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(MainActivity.this, R.string.incorrect_toast ,Toast.LENGTH_SHORT).show();
+            if (questions[questionIndex].isAnswer() == selection) {
+                Toast.makeText(MainActivity.this, R.string.correct_toast ,Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(MainActivity.this, R.string.incorrect_toast ,Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

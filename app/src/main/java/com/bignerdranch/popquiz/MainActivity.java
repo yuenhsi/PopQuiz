@@ -2,7 +2,6 @@ package com.bignerdranch.popquiz;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private int questionIndex;
     private Question[] questions;
     private View mQuestionTextView;
+    private boolean cheated;
 
     public static final String TAG = "MainActivity";
     public static final String QUESTION_INDEX = "index";
@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         Question questionThree = new Question(R.string.question_three, false);
         Question questionFour = new Question(R.string.question_four, true);
         Question questionFive = new Question(R.string.question_five, true);
+        cheated = false;
 
         questions = new Question[]
                 {questionOne, questionTwo, questionThree, questionFour, questionFive};
@@ -68,18 +69,25 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 checkAnswerAndToast(questionIndex, true);
+                if (cheated) {
+                    Toast.makeText(MainActivity.this, R.string.cheated_toast,Toast.LENGTH_SHORT).show();
+                }
             }
         });
         mFalseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 checkAnswerAndToast(questionIndex, false);
+                if (cheated) {
+                    Toast.makeText(MainActivity.this, R.string.cheated_toast,Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         View.OnClickListener incrementIndexAndUpdateListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cheated = false;
                 questionIndex = (questionIndex + 1) % questions.length;
                 updateQuestion();
             }
@@ -125,7 +133,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == REQUESTCODE_CHEAT) {
             if (resultCode == Activity.RESULT_OK) {
-                data.getBooleanExtra(CheatActivity.DID_I_CHEAT_EXTRA, false);
+                if (data.getBooleanExtra(CheatActivity.DID_I_CHEAT_EXTRA, false)) {
+                    cheated = true;
+                }
             }
         }
     }

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class CheatActivity extends AppCompatActivity {
 
@@ -24,6 +25,8 @@ public class CheatActivity extends AppCompatActivity {
         mConfirmationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(CheatActivity.this,
+                        String.valueOf(getIntent().getBooleanExtra(IS_ANSWER_TRUE_EXTRA, false)), Toast.LENGTH_SHORT).show();
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra(DID_I_CHEAT_EXTRA, true);
                 setResult(Activity.RESULT_OK, returnIntent);

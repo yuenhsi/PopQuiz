@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private View mQuestionTextView;
     private boolean cheated;
 
+    public static final String CHEATED = "cheated";
     public static final String TAG = "MainActivity";
     public static final String QUESTION_INDEX = "index";
     public static final int REQUESTCODE_CHEAT = 0;
@@ -38,15 +39,15 @@ public class MainActivity extends AppCompatActivity {
         Question questionThree = new Question(R.string.question_three, false);
         Question questionFour = new Question(R.string.question_four, true);
         Question questionFive = new Question(R.string.question_five, true);
-        cheated = false;
-
         questions = new Question[]
                 {questionOne, questionTwo, questionThree, questionFour, questionFive};
-        questionIndex = 0;
         if (savedInstanceState != null) {
             questionIndex = savedInstanceState.getInt(QUESTION_INDEX);
+            cheated = savedInstanceState.getBoolean(CHEATED);
+        } else {
+            questionIndex = 0;
+            cheated = false;
         }
-
         updateQuestion();
 
         mTrueButton = (Button)findViewById(R.id.true_button);
@@ -74,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
         mFalseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
         mPrevButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cheated = false;
                 questionIndex = (questionIndex == 0 ? 0 : (questionIndex - 1) % questions.length);
                 updateQuestion();
             }
@@ -130,7 +133,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         if (requestCode == REQUESTCODE_CHEAT) {
             if (resultCode == Activity.RESULT_OK) {
                 if (data.getBooleanExtra(CheatActivity.DID_I_CHEAT_EXTRA, false)) {
@@ -145,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(savedInstanceState);
         Log.d(TAG, "onSaveInstanceState called.");
         savedInstanceState.putInt(QUESTION_INDEX, questionIndex);
+        savedInstanceState.putBoolean(CHEATED, cheated);
     }
 
     private void updateQuestion() {

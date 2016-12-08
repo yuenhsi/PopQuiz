@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 cheated = false;
-                questionIndex = (questionIndex + 1) % questions.length;
+                questionIndex = (questionIndex == (questions.length - 1) ? questionIndex : (questionIndex + 1) % questions.length);
                 updateQuestion();
             }
         };
